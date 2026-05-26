@@ -102,29 +102,35 @@ export function StoreHome() {
     <div className={pageWrapClass}>
       <div className={contentContainerClass}>
         <div className={sectionStackClass}>
-          <section>
-            <div className={bannerGridClass}>
-              <Card className={bannerMainCardClass}>
-                <img
-                  src={mainBanner.imageUrl}
-                  alt="Feature Image"
-                  className={bannerMainImageClass}
-                />
-              </Card>
-
-              <div className={bannerSideGridClass}>
-                {sideBanners.map((item) => (
-                  <Card key={item._id} className={bannerSideCardClass}>
+          {data.banners && data.banners.length > 0 && (
+            <section>
+              <div className={bannerGridClass}>
+                {mainBanner && (
+                  <Card className={bannerMainCardClass}>
                     <img
-                      src={item.imageUrl}
+                      src={mainBanner.imageUrl}
                       alt="Feature Image"
-                      className={bannerSideImageClass}
+                      className={bannerMainImageClass}
                     />
                   </Card>
-                ))}
+                )}
+
+                {sideBanners.length > 0 && (
+                  <div className={bannerSideGridClass}>
+                    {sideBanners.map((item) => (
+                      <Card key={item?._id} className={bannerSideCardClass}>
+                        <img
+                          src={item?.imageUrl}
+                          alt="Feature Image"
+                          className={bannerSideImageClass}
+                        />
+                      </Card>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {!!data.categories.length ? (
             <section>
